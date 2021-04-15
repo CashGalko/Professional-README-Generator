@@ -72,6 +72,12 @@ inquirer
         
     },
     {
+      type: 'input',
+      message: 'Please provide your preferred email address.',
+      name: 'email',
+        
+    },
+    {
       type: 'list',
       message: 'Please choose the correct license for this application.',
       name: 'license',
@@ -81,7 +87,8 @@ inquirer
   ])
   .then((data) => {
     const filename = `README.md`;
-    const readMeTemp = `${data.title}`
+    const readMeTemp = `# ${data.title}\n ## Description\n ${data.descript}\n ## Installation Instructions\n ${data.install}\n ## Usage\n ${data.usage}\n ## Contributing\n ${data.contribGuide}\n ## Tests\n ${data.testInfo}\n ## Questions\n Please feel free to contact me with any questions at my email: ${data.email}. You can find access to this repo or any of my other projects at my [Github](${data.gitURL}) `
+   
     fs.writeFile(filename, readMeTemp, (err) => 
     err ? console.log(err) : console.log('Success!')
 
