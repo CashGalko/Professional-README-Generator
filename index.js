@@ -1,5 +1,4 @@
 
-
 const inquirer = require('inquirer');
 const fs = require('fs');
 
@@ -14,7 +13,7 @@ inquirer
     },
     {
       type: 'input',
-      'Please enter a detailed description of your project.',
+      message: 'Please enter a detailed description of your project.',
       name: 'descript',
       
     },
@@ -76,7 +75,7 @@ inquirer
       type: 'list',
       message: 'Please choose the correct license for this application.',
       name: 'license',
-      choices: ['1', '2', '3']
+      choices: ['1', '2', '3'],
     },
 
   ])
