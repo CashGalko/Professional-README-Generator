@@ -1,6 +1,7 @@
 
 const inquirer = require('inquirer');
 const fs = require('fs');
+const markdown = require('./utils/generateMarkdown')
 
 
 // Invokes the inquirer npm and lists the necessary questions. Then generates the README file with the data collected from the questions. 
@@ -51,7 +52,7 @@ inquirer
       type: 'input',
       message: 'Please enter any guidelines for contributors to your project.',
       name: 'contribGuide',
-      when: (answers) => answers.contribFile === false || answers.openSource === true,
+      when: (answers) => answers.contribution === false && answers.openSource === true,
     },
     {
       type: 'input',
@@ -81,13 +82,13 @@ inquirer
       type: 'list',
       message: 'Please choose the correct license for this application.',
       name: 'license',
-      choices: ['1', '2', '3'],
+      choices: ['Apache', 'Boost', 'BSD3', 'Eclipse', 'GPLv3', 'IPL', 'ISC', 'MIT', 'MPL', 'Perl', 'Unlicense', 'WTFPL'],
     },
 
   ])
   .then((data) => {
     const filename = `README.md`;
-    const readMeTemp = `# ${data.title}\n ## Description\n ${data.descript}\n ## Installation Instructions\n ${data.install}\n ## Usage\n ${data.usage}\n ## Contributing\n ${data.contribGuide}\n ## Tests\n ${data.testInfo}\n ## Questions\n Please feel free to contact me with any questions at my email: ${data.email}. You can find access to this repo or any of my other projects at my [Github](${data.gitURL}) `
+    const readMeTemp = markdown(data);
    
     fs.writeFile(filename, readMeTemp, (err) => 
     err ? console.log(err) : console.log('Success!')
